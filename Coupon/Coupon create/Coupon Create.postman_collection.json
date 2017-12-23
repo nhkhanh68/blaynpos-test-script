@@ -1,0 +1,120 @@
+{
+	"info": {
+		"name": "Coupon create",
+		"_postman_id": "a18551ce-e411-3a2a-dcb6-4888025d40a8",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/coupon/create.json",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c2514d31-f5f0-4f47-b372-81e8430a4685",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "265642bf-971d-471e-8117-02f77b4ca805",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Read coupon after created\", function () {",
+							"    // pm.response.json() is response from server after postman send req",
+							"    var jsonData = pm.response.json();",
+							"    if(pm.response.to.have.status(200)){",
+							"        if(jsonData.coupon_id !== undefined){",
+							"            // create url for read API",
+							"            var url = pm.globals.get(\"server_address\") + \"/dev/v1/coupon/read.json?access_token=\" + pm.globals.get(\"access_token\") + \"&coupon_id=\" + jsonData.coupon_id;",
+							"            // send read API to server",
+							"            pm.sendRequest({",
+							"                url: url,",
+							"                method: 'GET'",
+							"            }, function (err, response) {",
+							"                console.log(response.json());",
+							"                //response.json() is response from server after send read API",
+							"                var readCouponData = response.json();",
+							"                pm.test(\"Check Content of Coupon\", function () {",
+							"                    pm.expect(parseInt(readCouponData.content)).to.eql(parseInt(pm.environment.get(\"content\")));",
+							"                });",
+							"                pm.test(\"Check Name of Coupon\", function () {",
+							"                    pm.expect(readCouponData.name).to.eql(pm.environment.get(\"name\"));",
+							"                });",
+							"                pm.test(\"Check type of Coupon\", function () {",
+							"                    pm.expect(parseInt(readCouponData.type)).to.eql(parseInt(pm.environment.get(\"type\")));",
+							"                });",
+							"            });",
+							"        }",
+							"    }",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "type",
+							"type": "text",
+							"value": "{{type}}"
+						},
+						{
+							"key": "content",
+							"type": "text",
+							"value": "{{content}}"
+						},
+						{
+							"key": "USER_ID",
+							"type": "text",
+							"value": "{{USER_ID}}"
+						},
+						{
+							"key": "ROLE_ID",
+							"type": "text",
+							"value": "{{ROLE_ID}}"
+						},
+						{
+							"key": "access_token",
+							"type": "text",
+							"value": "{{access_token}}"
+						},
+						{
+							"key": "name",
+							"type": "text",
+							"value": "{{name}}"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/coupon/create.json",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"coupon",
+						"create.json"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

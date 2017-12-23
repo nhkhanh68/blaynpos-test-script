@@ -1,0 +1,19 @@
+//--- /category/read.json ---//
+    http_req: {
+        "url": "/category/create.json",
+        "method": "POST"
+    }
+
+    body: {
+      	name:cuong
+	access_token:14995969085a38d102ae9b95.88980464
+	USER_ID:411
+	ROLE_ID:2
+
+    }
+
+    --- example ---
+
+    --- END example ---
+
+//--- END /item/create.json ---//

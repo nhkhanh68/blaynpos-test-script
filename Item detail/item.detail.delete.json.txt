@@ -1,0 +1,22 @@
+//--- /item/detail/delete.json ---//
+    http_req: {
+        "url": "/item/detail/delete.json",
+        "method": "POST"
+    }
+    body: {
+        'scope': 'w_item',
+        'role': 'public',
+        'action': 'item',
+        'method': 'create',
+        'format': 'json'
+    }
+
+    params: { 
+        "access_token": "",
+        "USER_ID": "",
+        "ROLE_ID": "",
+        "modified": "",
+        "item_detail_id": ""
+
+    }
+//--- END /item/detail/delete.json ---//

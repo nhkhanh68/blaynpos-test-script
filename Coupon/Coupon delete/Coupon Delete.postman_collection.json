@@ -1,0 +1,90 @@
+{
+	"info": {
+		"name": "Coupon delete",
+		"_postman_id": "5f2b515c-221f-33d7-605e-ec62b248e94e",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/coupon/delete.json",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "497c1d5d-7ec8-41d5-9134-35ac7d5acbe7",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"if(pm.response.to.have.status(200)){",
+							"    //read list Coupon have been deleted",
+							"    var state =3;",
+							"    var url = pm.globals.get(\"server_address\") + \"/dev/v1/coupon/read.json?access_token=\" + pm.globals.get(\"access_token\") + \"&state=\" + state;",
+							"    pm.sendRequest({",
+							"        url: url,",
+							"        method: 'GET'",
+							"    }, function (err, response) {",
+							"        console.log(response.json());",
+							"        readCouponData = response.json();",
+							"        // check if in list Coupon have been deleted has a coupon which recently deleted in this test case",
+							"        function equals(element) {",
+							"            return element.id == pm.environment.get(\"coupon_id\");",
+							"        }",
+							"        var coupon = readCouponData.find(equals);",
+							"        pm.test(\"Check Delete Coupon\", function () {",
+							"            pm.expect(parseInt(coupon.id)).to.eql(parseInt(pm.environment.get(\"coupon_id\")));",
+							"        });",
+							"    });",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"type": "text"
+						},
+						{
+							"key": "coupon_id",
+							"value": "{{coupon_id}}",
+							"type": "text"
+						},
+						{
+							"key": "USER_ID",
+							"value": "{{USER_ID}}",
+							"type": "text"
+						},
+						{
+							"key": "ROLE_ID",
+							"value": "{{ROLE_ID}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "192.168.132.216/dev/v1/coupon/delete.json",
+					"host": [
+						"192",
+						"168",
+						"132",
+						"216"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"coupon",
+						"delete.json"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

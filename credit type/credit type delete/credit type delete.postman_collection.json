@@ -1,0 +1,93 @@
+{
+	"info": {
+		"name": "credit type delete",
+		"_postman_id": "19c518cd-41aa-439b-046f-189ed713f818",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "credit type delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "761fbe20-2abc-47a7-9dca-d06e4116fb9b",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"if(pm.response.to.have.status(200)){",
+							"    //read list credit type have been deleted",
+							"    var state = 3;",
+							"    var url = pm.globals.get(\"server_address\") + \"/dev/v1/credit/type/read.json?access_token=\" + pm.globals.get(\"access_token\") + \"&terminal_id=\" + pm.globals.get(\"terminal_id\") + \"&cash_flow_id=\" + pm.environment.get(\"cash_flow_id\") + \"&state=\" + state;",
+							"    pm.sendRequest({",
+							"        url: url,",
+							"        method: 'GET'",
+							"    }, function (err, response) {",
+							"        var readData = response.json();",
+							"        pm.test(\"Check state cash flow after delete: state = 3\", function () {",
+							"            pm.expect(parseInt(readData.id)).to.eql(parseInt(pm.environment.get(\"cash_flow_id\")));",
+							"        });",
+							"    });",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "USER_ID",
+							"value": "{{USER_ID}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "ROLE_ID",
+							"value": "{{ROLE_ID}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "terminal_id",
+							"value": "{{terminal_id}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "credit_type_id",
+							"value": "{{credit_type_id}}",
+							"type": "text",
+							"description": ""
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/credit/type/delete.json",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"credit",
+						"type",
+						"delete.json"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

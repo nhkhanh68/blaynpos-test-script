@@ -1,0 +1,31 @@
+//--- /item/delete.json ---//
+    http_req: {
+        "url": "/item/delete.json",
+        "method": "POST"
+
+    params: {
+        "uid": "",
+        "item_id": "",
+        "modified": "",
+        "access_token": "",
+        "USER_ID": "441",
+        "ROLE_ID": "2",
+        'scope': 'w_item',
+        'role': 'public',
+        'action': 'item',
+        'method': 'create',
+        'format': 'json'
+    }
+
+    curl: {
+        curl -X POST \
+          'http://192.168.132.216/dev/v1/item/delete.json?scope=w_item&role=public&action=item&method=create&format=json&uid=1&modifie=1&access_token=11521101415a2646b317be38.86520382&USER_ID=441&ROLE_ID=2&item_id=20335&name=khanha&change_f=1&abbreviation=1&cost_price=1981&stock=&price=1834' \
+          -H 'cache-control: no-cache' \
+          -H 'content-type: application/x-www-form-urlencoded' \
+          -H 'postman-token: a7fd7d9a-9d71-f35d-35e2-296e1f5420d9'
+    }
+
+    --- example ---
+    
+    --- END example ---
+//--- END /item/delete.json ---//

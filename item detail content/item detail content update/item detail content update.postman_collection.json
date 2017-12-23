@@ -1,0 +1,117 @@
+{
+	"info": {
+		"name": "item detail content update",
+		"_postman_id": "33055465-70c0-3273-b36d-744cd8c452c1",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "item detail content update",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "088f012f-5e26-4eed-8d9f-2b2b9ceaf70e",
+						"type": "text/javascript",
+						"exec": [
+							"var readData;",
+							"pm.test(\"Read item detail content after updated\", function () {",
+							"    // Get response data",
+							"    var jsonData = pm.response.json();",
+							"    if(pm.response.to.have.status(200)){ //check if response is ok",
+							"        // Sending http request read",
+							"        var url = pm.globals.get(\"server_address\") + \"/dev/v1/item/detail/content/read.json?access_token=\" + pm.globals.get(\"access_token\") + \"&item_detail_content_id=\" + pm.environment.get(\"item_id\");",
+							"        pm.sendRequest({",
+							"            url: url,",
+							"            method: 'GET'",
+							"        }, function (err, response) {",
+							"            readData = response.json();",
+							"            // Get response from http request read",
+							"            pm.test(\"Check Name of item detail content\", function () {",
+							"                pm.expect(readData.name).to.eql(pm.environment.get(\"name\"));",
+							"            });",
+							"             pm.test(\"Check item_detail_id of iten detail content\", function () {",
+							"                pm.expect(parseInt(readData.item_detail_id)).to.eql(parseInt(pm.environment.get(\"item_detail_id\")));",
+							"            });",
+							"            pm.test(\"Check item_id of iten detail content\", function () {",
+							"                pm.expect(parseInt(readData.item_id)).to.eql(parseInt(pm.environment.get(\"item_id\")));",
+							"            });",
+							"        });",
+							"    }",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "item_detail_id",
+							"value": "{{item_detail_id}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "USER_ID",
+							"value": "{{USER_ID}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "ROLE_ID",
+							"value": "{{ROLE_ID}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "item_id",
+							"value": "{{item_id}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "name",
+							"value": "{{name}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "item_detail_content_id",
+							"value": "{{item_detail_content_id}}",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/item/detail/content/update.json",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"item",
+						"detail",
+						"content",
+						"update.json"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

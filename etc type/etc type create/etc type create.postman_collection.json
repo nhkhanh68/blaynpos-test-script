@@ -1,0 +1,100 @@
+{
+	"info": {
+		"name": "etc type create",
+		"_postman_id": "332f603d-2f70-5dc9-8c12-5fdfe0e808f7",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "etc/type/create.json",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2e4cc6cf-6a8f-4eb7-9af4-2515c6f0b449",
+						"type": "text/javascript",
+						"exec": [
+							"var readData;",
+							"pm.test(\"Read etc type after created\", function () {",
+							"    // Get response data",
+							"    var jsonData = pm.response.json();",
+							"    if(pm.response.to.have.status(200)){ //check if response is ok",
+							"        if(jsonData.etc_type_id !== undefined){",
+							"            // Sending http request read",
+							"            var url = pm.globals.get(\"server_address\") + \"/dev/v1/etc/type/read.json?access_token=\" + pm.globals.get(\"access_token\") + \"&etc_type_id=\" + jsonData.etc_type_id;",
+							"            pm.sendRequest({",
+							"                url: url,",
+							"                method: 'GET'",
+							"            }, function (err, response) {",
+							"                readData = response.json();",
+							"                // Get response from http request read",
+							"                pm.test(\"Check switch of cash flow\", function () {",
+							"                    pm.expect(parseInt(readData.switch_id)).to.eql(parseInt(pm.environment.get(\"switch_id\")));",
+							"                });",
+							"            });",
+							"        }",
+							"    }",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "USER_ID",
+							"value": "{{USER_ID}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "ROLE_ID",
+							"value": "{{ROLE_ID}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "terminal_id",
+							"value": "{{terminal_id}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "name",
+							"value": "{{name}}",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/etc/type/create.json",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"etc",
+						"type",
+						"create.json"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

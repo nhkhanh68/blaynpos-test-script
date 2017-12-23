@@ -1,0 +1,138 @@
+//--- /payment/create.json ---//
+    http_req: {
+        "url": "/payment/create.json",
+        "method": "POST"
+    }
+
+    body: {
+        'scope': 'w_payment',
+        'role': 'public',
+        'action': 'payment',
+        'method': 'create',
+        'format': 'json'
+    }
+
+    params: {
+        "access_token": ""
+        'payment_id': '',
+        'type': '',
+        'order_id_list': '[]',
+        'terminal_id': '',
+        'staff_id': '',
+        'subtotal': '',
+        'tax': '',
+        'total': '',
+        'deposit': '',
+        'change': '',
+        "state": "",
+        "discount": "",
+        "discount_type": "",
+        "discount_price": "",
+        "service_charge": "",
+        "service_charge_type": "",
+        "service_charge_price": "",
+        "late_night_charge": "",
+        "late_night_charge_type": "",
+        "late_night_charge_price": "",
+        "created": "",
+        "parent_id": "",
+        "sync_f": "",
+        "finish_f": "",
+        "customer_id": "",
+        "credit_type_id": "",
+        "discount_price2": "",
+        "etc_type_id": "",
+        "ignoreOpened": "",
+        "coupon_list": "[]",
+        "coupon_id": "", //A set of coupon data
+        "busy_count": "" //A set of coupon data
+    }
+    --- example ---
+		payment_id được tạo ra khi tạo order, sau đó khi payment thì POS gửi lại payment_id cho server vì vậy có thể tự điền.
+        Trong csdl, payment_id nhỏ nhất là 144646329300010350001 nên có thể điền payment_id nhỏ hơn 144646329300010350001 là được.
+        trong 
+        type là 1 vì trả bằng cash
+        shop_id: 386
+        pos_shop3.p_order.shop_id.id (order_id trong order_list id): 15851, 15995, 16149, 16162, 17032
+        đối với payment by cash with coupon dicounting cần giá trị payment_id chưa có trong csdl, nếu như trùng thì
+        sẽ báo ko tạo dc payment.
+
+        SQL :select subtotal, discount, service_charge, service_charge_price, tax, total, deposit from p_payment where  discount_type='4' limit 10;
+        "service_charge_type": "1"
+        "late_night_charge_type": "1"
+        +----------+----------+----------------+----------------------+------+-------+---------+
+        | subtotal | discount | service_charge | service_charge_price | tax  | total | deposit |
+        +----------+----------+----------------+----------------------+------+-------+---------+
+        |     6852 |      100 |              0 |                    0 |  548 |  7400 |    7400 |
+        |     6852 |      100 |              0 |                    0 |  548 |  7400 |    7400 |
+        |     6852 |      100 |              0 |                    0 |  548 |  7400 |    7400 |
+        |      843 |      100 |             10 |                   84 |   74 |  1001 |    1001 |
+        |      833 |      100 |              0 |                    0 |   67 |   900 |     900 |
+        |      843 |      100 |             10 |                   84 |   74 |  1001 |    1001 |
+        |      843 |      100 |             10 |                   84 |   74 |  1001 |    1001 |
+        |      680 |       82 |              0 |                    0 |   54 |   734 |     734 |
+        |     1706 |      205 |              0 |                    0 |  137 |  1843 |    2000 |
+        |    37037 |     2768 |              0 |                    0 | 2963 | 40000 |   40000 |
+        +----------+----------+----------------+----------------------+------+-------+---------+
+        pos_shop3.p_coupon.shop_id.id: coupon_id: 117, 118, 119
+        params: {
+            "access_token": ""
+            'payment_id': '2',
+            'type': '1', //payment by cash
+            'order_id_list': '',
+            'terminal_id': '1168',
+            'staff_id': '292',
+            'subtotal': '6852',
+            'tax': '548',
+            'total': '7400',
+            'deposit': '7400',
+            'change': '0', //trong csdl đều là 0
+            "state": "1",
+            "discount": "100",
+            "discount_type": "4",
+            "discount_price": "100",
+            "service_charge": "0",
+            "service_charge_type": "1",
+            "service_charge_price": "0",
+            "late_night_charge": "0",
+            "late_night_charge_type": "1",
+            "late_night_charge_price": "0",
+            "created": "",
+            "parent_id": "",
+            "sync_f": "",
+            "finish_f": "",
+            "customer_id": "",
+            "credit_type_id": "",
+            "discount_price2": "0",
+            "etc_type_id": "",
+            "ignoreOpened": ""
+        }
+        body: {
+            'order_id_list[0]': '17032',
+            'coupon_list[0][coupon_id]': '117',
+            'coupon_list[0][busy_count]': '1'
+        }
+        response: {
+		    "total": 7400,
+		    "terminal_id": 1168,
+		    "shop_id": 386,
+		    "deposit": 7400,
+		    "change": 0,
+		    "state": 1,
+		    "staff_id": 292,
+		    "type": 1,
+		    "subtotal": 6852,
+		    "id": "7",
+		    "tax": 548,
+		    "created": 1511406628,
+		    "staff_name": "{\"name0\":\"管理者\",\"name1\":\"\"}",
+		    "table_activity_id": 10617
+		}
+		pos_shop3.p_payment_coupon tạo ra 1 record 
+		+------------+-----------+------------+---------+------------+
+		| payment_id | coupon_id | busy_count | shop_id | created    |
+		+------------+-----------+------------+---------+------------+
+		| 8          |       117 |          1 |     386 | 1512113817 |
+		+------------+-----------+------------+---------+------------+
+    --- END example ---
+//--- END /payment/create.json ---//

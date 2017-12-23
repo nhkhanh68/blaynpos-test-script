@@ -1,0 +1,59 @@
+{
+	"info": {
+		"name": "switch read",
+		"_postman_id": "6c817502-e510-3095-2145-71a00200567b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/switch/read.json",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/switch/read.json?access_token={{access_token}}&USER_ID={{USER_ID}}&ROLE_ID={{ROLE_ID}}&terminal_id={{terminal_id}}&switch_id={{switch_id}}",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"switch",
+						"read.json"
+					],
+					"query": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"equals": true
+						},
+						{
+							"key": "USER_ID",
+							"value": "{{USER_ID}}",
+							"equals": true
+						},
+						{
+							"key": "ROLE_ID",
+							"value": "{{ROLE_ID}}",
+							"equals": true
+						},
+						{
+							"key": "terminal_id",
+							"value": "{{terminal_id}}",
+							"equals": true
+						},
+						{
+							"key": "switch_id",
+							"value": "{{switch_id}}",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

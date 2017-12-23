@@ -1,0 +1,54 @@
+{
+	"info": {
+		"name": "Payment read",
+		"_postman_id": "ce2aef5e-d2d5-e277-ec7d-d571c377c21b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/payment/read.json",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/payment/read.json?access_token={{access_token}}&switch_day=2017-09-05&offset=0&limit=20",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"payment",
+						"read.json"
+					],
+					"query": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"equals": true
+						},
+						{
+							"key": "switch_day",
+							"value": "2017-09-05",
+							"equals": true
+						},
+						{
+							"key": "offset",
+							"value": "0",
+							"equals": true
+						},
+						{
+							"key": "limit",
+							"value": "20",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

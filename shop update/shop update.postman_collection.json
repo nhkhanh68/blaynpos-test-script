@@ -1,0 +1,114 @@
+{
+	"info": {
+		"name": "shop update",
+		"_postman_id": "8bb0a1be-0f48-c08d-5fd0-0c82d8b207fa",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "shop/update.json",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "timer_f",
+							"value": "{{timer_f}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "stock_f",
+							"value": "{{stock_f}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "credit_type_f",
+							"value": "{{credit_type_f}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "cost_price_f",
+							"value": "{{cost_price_f}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "time_display_t",
+							"value": "{{time_display_t}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "omit_t",
+							"value": "{{omit_t}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "discount_v",
+							"value": "{{discount_v}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "etc_type_f",
+							"value": "{{etc_type_f}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "timer_t",
+							"value": "{{timer_t}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "timer_v",
+							"value": "{{timer_v}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "USER_ID",
+							"value": "{{USER_ID}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "ROLE_ID",
+							"value": "{{ROLE_ID}}",
+							"type": "text",
+							"description": ""
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/shop/update.json",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"shop",
+						"update.json"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,40 @@
+//--- /item/create.json ---//
+    http_req: {
+        "url": "/item/create.json",
+        "method": "POST"
+    }
+
+    params: {
+        'scope': 'w_item',
+        'role': 'public',
+        'action': 'item',
+        'method': 'create',
+        'format': 'json',
+        "uid": "",
+        "item_id": "",
+        "name": "",
+        "price": "",
+        "change_f": "",
+        "modified": "",
+        "abbreviation": "",
+        "cost_price": "",
+        "stock": "",
+        "access_token": "",
+        "USER_ID": "",
+        "ROLE_ID": ""
+
+    }
+
+    curl: {
+        curl -X POST \
+          'http://192.168.132.216/dev/v1/item/create.json?scope=w_item&role=public&action=item&method=create&format=json&uid=1&modifie=1&access_token=15969460625a21067a3289e3.46689813&USER_ID=441&ROLE_ID=2&name=khanha&change_f=1&abbreviation=1&cost_price=1981&stock=&price=1834' \
+          -H 'cache-control: no-cache' \
+          -H 'content-type: application/x-www-form-urlencoded' \
+          -H 'postman-token: d77a643b-aa24-749a-fc95-9a6143ecf987'
+    }
+
+    --- example ---
+
+    --- END example ---
+
+//--- END /item/create.json ---//

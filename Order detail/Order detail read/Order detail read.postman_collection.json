@@ -1,0 +1,45 @@
+{
+	"info": {
+		"name": "Order detail read",
+		"_postman_id": "ce2aef5e-d2d5-e277-ec7d-d571c377c21b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/order/detail/read.json",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/order/detail/read.json?access_token={{access_token}}&order_id=17039",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"order",
+						"detail",
+						"read.json"
+					],
+					"query": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"equals": true
+						},
+						{
+							"key": "order_id",
+							"value": "{{order_id}}",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

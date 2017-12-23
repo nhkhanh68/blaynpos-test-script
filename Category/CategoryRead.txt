@@ -1,0 +1,19 @@
+﻿//--- /category/read.json ---//
+    http_req: {
+        "url": "/category/read.json",
+        "method": "GET"
+    }
+
+    body: {
+        access_token:18432355045a315db968d855.35428899
+	state:1
+	nondepth:1
+	category_id:5180
+
+    }
+
+    --- example ---
+
+    --- END example ---
+
+//--- END /item/create.json ---//

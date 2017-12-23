@@ -1,0 +1,167 @@
+{
+	"info": {
+		"name": "Order create",
+		"_postman_id": "ce2aef5e-d2d5-e277-ec7d-d571c377c21b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "order/create.json",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "707695b2-44ca-4ada-9ad9-4f6f7b35fc4c",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "3edbaa74-30be-4cb8-a279-433999c7d28e",
+						"type": "text/javascript",
+						"exec": [
+							"var order_detail_jsonarray = JSON.parse(pm.environment.get(\"order_detail_jsonarray\"));",
+							"var order_detail_count = order_detail_jsonarray.length;",
+							"var response_data;",
+							"",
+							"// var countItem = 1;",
+							"// check detail in order_detail",
+							"// function checkOrderDetail(item){",
+							"//     // console.log(Object.keys(item));",
+							"//     var arrayKeysInItem = Object.keys(item);",
+							"//     console.log(\"*** Check item \" + countItem++ + \" ***\");",
+							"//     for(var i = 0; i < arrayKeysInItem.length; i++){",
+							"//         console.log(\"Check \" + arrayKeysInItem[i] + \": \" + item[arrayKeysInItem[i]]);",
+							"//     }",
+							"// }",
+							"",
+							"// order_detail_jsonarray.forEach(checkOrderDetail);",
+							"",
+							"pm.test(\"Create order success\", function () {",
+							"    response_data = pm.response.json();",
+							"    if(pm.response.to.have.status(200)){",
+							"        if(response_data.order_id !== undefined){",
+							"            var url = pm.globals.get(\"server_address\") +\"/dev/v1/order/detail/read.json?access_token=\" + pm.globals.get(\"access_token\") + \"&order_id=\" + response_data.order_id;",
+							"            pm.sendRequest(url, function (err, response) {",
+							"                var response_order_details = response.json();",
+							"                var response_order_details_count = response_order_details.length;",
+							"                pm.test(\"Check number of item store in DB\", function(){",
+							"                    pm.expect(parseInt(response_order_details_count)).to.eql(parseInt(order_detail_count));",
+							"                });",
+							"                if(parseInt(response_order_details_count) == parseInt(order_detail_count)){",
+							"                    order_detail_jsonarray.forEach(function(item){",
+							"                        var arrayKeysInItem = Object.keys(item);",
+							"                        console.log(\"*** Check item \" + item.item_id + \" ***\");",
+							"                        var item_id = item.item_id;",
+							"                        var order_detail = response_order_details.find(function(od){",
+							"                            if(od.item_id == item_id){",
+							"                                return od;",
+							"                            }",
+							"                        });",
+							"                        // console.log(order_detail);",
+							"                        if(order_detail !== undefined){",
+							"                            pm.test(\"Expect order_detail (in DB) has item_id = \" + item_id, function(){",
+							"                                pm.expect(parseInt(item_id)).to.eql(parseInt(order_detail.item_id));",
+							"                            });",
+							"                            var check_detail_in_order_detail = true;",
+							"                            for(var i = 0; i < arrayKeysInItem.length; i++){",
+							"                                if(arrayKeysInItem[i] != \"modified\"){",
+							"                                    if(item[arrayKeysInItem[i]] !== \"\" && item[arrayKeysInItem[i]] !== null){",
+							"                                        if(item[arrayKeysInItem[i]] != order_detail[arrayKeysInItem[i]]){",
+							"                                            check_detail_in_order_detail = false;",
+							"                                            console.log(\"key: \" + arrayKeysInItem[i]);",
+							"                                            console.log(\"value in request: \" + item[arrayKeysInItem[i]]);",
+							"                                            console.log(\"value in db: \" + order_detail[arrayKeysInItem[i]]);",
+							"                                        }",
+							"                                    }",
+							"                                }",
+							"                                // console.log(\"Check \" + arrayKeysInItem[i] + \": \" + item[arrayKeysInItem[i]]);",
+							"                            }",
+							"                            pm.test(\"Expect order_detail has item_id = \" + item_id + \" has right values\", function(){",
+							"                                pm.expect(check_detail_in_order_detail).to.eql(true);",
+							"                            });",
+							"                        }",
+							"                    });",
+							"                }",
+							"            });",
+							"        }",
+							"    }",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "uid",
+							"value": "{{uid}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "state",
+							"value": "{{state}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "staff_id",
+							"value": "{{staff_id}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "ignoreOpened",
+							"value": "{{ignoreOpened}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "table_activity_id",
+							"value": "{{table_activity_id}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "order_detail_jsonarray",
+							"value": "{{order_detail_jsonarray}}",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/order/create.json",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"order",
+						"create.json"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

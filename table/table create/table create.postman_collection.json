@@ -1,0 +1,99 @@
+{
+	"info": {
+		"name": "table create",
+		"_postman_id": "2d0cd750-9f34-b374-d885-adaa1b3b7011",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/table/create.json",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d5639f3d-f855-463c-b8ef-4b740468f84f",
+						"type": "text/javascript",
+						"exec": [
+							"var readData;",
+							"pm.test(\"Read table after created\", function () {",
+							"    // Get response data",
+							"    var jsonData = pm.response.json();",
+							"    if(pm.response.to.have.status(200)){ //check if response is ok",
+							"        if(jsonData.table_id !== undefined){",
+							"            // Sending http request read",
+							"            var url = pm.globals.get(\"server_address\") + \"/dev/v1/cash/flow/read.json?access_token=\" + pm.globals.get(\"access_token\") + \"&table_id=\" + jsonData.table_id;",
+							"            pm.sendRequest({",
+							"                url: url,",
+							"                method: 'GET'",
+							"            }, function (err, response) {",
+							"                readData = response.json();",
+							"                // Get response from http request read",
+							"                pm.test(\"Check name of table\", function () {",
+							"                    pm.expect(readData.name).to.eql(pm.environment.get(\"name\"));",
+							"                });",
+							"            });",
+							"        }",
+							"    }",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "USER_ID",
+							"value": "{{USER_ID}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "ROLE_ID",
+							"value": "{{ROLE_ID}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "terminal_id",
+							"value": "{{terminal_id}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "name",
+							"value": "{{name}}",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/table/create.json",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"table",
+						"create.json"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

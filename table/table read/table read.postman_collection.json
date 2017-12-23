@@ -1,0 +1,97 @@
+{
+	"info": {
+		"name": "table read",
+		"_postman_id": "15a65018-6e2c-1d6e-4ae8-b8fe3e76fb10",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "table/delete.json",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6007a54f-9514-495b-ac52-0167a022b1c6",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"if(pm.response.to.have.status(200)){",
+							"    //read list table have been deleted",
+							"    var state =3;",
+							"    var url = pm.globals.get(\"server_address\") + \"/dev/v1/table/read.json?access_token=\" + pm.globals.get(\"access_token\") + \"&state=\" + state;",
+							"    pm.sendRequest({",
+							"        url: url,",
+							"        method: 'GET'",
+							"    }, function (err, response) {",
+							"        var readData = response.json();",
+							"        //list table has state == 3",
+							"        function equals(element) {",
+							"            return element.id == pm.environment.get(\"table_id\");",
+							"        }",
+							"        var item = readData.find(equals);",
+							"        pm.test(\"Check state table after delete: state = 3\", function () {",
+							"            pm.expect(parseInt(item.id)).to.eql(parseInt(pm.environment.get(\"item_detail_id\")));",
+							"        });",
+							"    });",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "USER_ID",
+							"value": "{{USER_ID}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "ROLE_ID",
+							"value": "{{ROLE_ID}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "terminal_id",
+							"value": "{{terminal_id}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "table_id",
+							"value": "{{table_id}}",
+							"type": "text",
+							"description": ""
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/table/delete.json",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"table",
+						"delete.json"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

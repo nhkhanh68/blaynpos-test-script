@@ -1,0 +1,23 @@
+{
+	"info": {
+		"name": "print update",
+		"_postman_id": "6611219f-8feb-1fb0-f04e-8f6b9c58f572",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/print/update.json",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

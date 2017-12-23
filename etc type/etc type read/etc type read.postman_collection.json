@@ -1,0 +1,60 @@
+{
+	"info": {
+		"name": "etc type read",
+		"_postman_id": "332f603d-2f70-5dc9-8c12-5fdfe0e808f7",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "etc/type/read.json",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/etc/type/read.json?access_token={{access_token}}&USER_ID={{USER_ID}}&ROLE_ID={{ROLE_ID}}&terminal_id={{terminal_id}}&etc_type_id=117",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"etc",
+						"type",
+						"read.json"
+					],
+					"query": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"equals": true
+						},
+						{
+							"key": "USER_ID",
+							"value": "{{USER_ID}}",
+							"equals": true
+						},
+						{
+							"key": "ROLE_ID",
+							"value": "{{ROLE_ID}}",
+							"equals": true
+						},
+						{
+							"key": "terminal_id",
+							"value": "{{terminal_id}}",
+							"equals": true
+						},
+						{
+							"key": "etc_type_id",
+							"value": "117",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

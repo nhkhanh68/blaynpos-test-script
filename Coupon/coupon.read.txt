@@ -1,0 +1,20 @@
+//--- /coupon/read.json ---//
+    http_req: {
+        "url": "/coupon/read.json",
+        "method": "GET"
+    }
+
+    body: {
+        access_token:11957833415a3097b7666fc6.42431400
+        coupon_id:
+        USER_ID:441
+        ROLE_ID:2
+        state:
+
+    }
+
+    --- example ---
+
+    --- END example ---
+
+//--- END /coupon/read.json ---//

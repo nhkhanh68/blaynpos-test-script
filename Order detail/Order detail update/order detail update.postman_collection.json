@@ -1,0 +1,158 @@
+{
+	"info": {
+		"name": "order detail update",
+		"_postman_id": "8f6d2111-1a1d-ce6d-0950-b724dbbfff15",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/order/detail/update.json",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "994ee450-bc67-4a1e-a552-427a4a568343",
+						"type": "text/javascript",
+						"exec": [
+							"var readData;",
+							"pm.test(\"Read cash flow after updated\", function () {",
+							"    // Get response data",
+							"    var jsonData = pm.response.json();",
+							"    if(pm.response.to.have.status(200)){ //check if response is ok",
+							"        // Sending http request read",
+							"        var url = pm.globals.get(\"server_address\") + \"/dev/v1/cash/flow/read.json?access_token=\" + pm.globals.get(\"access_token\") + \"&terminal_id=\" + pm.globals.get(\"terminal_id\") + \"&cash_flow_id=\" + pm.environment.get(\"cash_flow_id\");",
+							"        pm.sendRequest({",
+							"            url: url,",
+							"            method: 'GET'",
+							"        }, function (err, response) {",
+							"            readData = response.json();",
+							"            // Get response from http request read",
+							"            pm.test(\"Check details of cash flow\", function () {",
+							"                pm.expect(parseInt(readData.details)).to.eql(parseInt(pm.environment.get(\"details\")));",
+							"            });",
+							"            pm.test(\"Check price of cash flow\", function () {",
+							"                pm.expect(parseInt(readData.price)).to.eql(parseInt(pm.environment.get(\"price\")));",
+							"            });",
+							"            pm.test(\"Check diff of cash flow\", function () {",
+							"                pm.expect(parseInt(readData.diff)).to.eql(parseInt(pm.environment.get(\"diff\")));",
+							"            });",
+							"        });",
+							"    }",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "USER_ID",
+							"value": "{{USER_ID}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "ROLE_ID",
+							"value": "{{ROLE_ID}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "terminal_id",
+							"value": "{{terminal_id}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "order_detail_id",
+							"value": "{{order_detail_id}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "price",
+							"value": "{{price}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "price_tax_in",
+							"value": "{{price_tax_in}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "order_number",
+							"value": "{{order_number}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "tax_inclusive_f",
+							"value": "{{tax_inclusive_f}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "ignore_stock_f",
+							"value": "{{ignore_stock_f}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "item_detail_content",
+							"value": "{{item_detail_content}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "serve_f",
+							"value": "{{serve_f}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "staff_id",
+							"value": "{{staff_id}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "ignoreOpened",
+							"value": "{{ignoreOpened}}",
+							"type": "text",
+							"description": ""
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/order/detail/update.json",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"order",
+						"detail",
+						"update.json"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

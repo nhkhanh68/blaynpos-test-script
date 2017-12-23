@@ -1,0 +1,19 @@
+//--- /coupon/delete.json ---//
+    http_req: {
+        "url": "/coupon/delete.json",
+        "method": "POST"
+    }
+
+    body: {
+        access_token:11957833415a3097b7666fc6.42431400
+        coupon_id:136
+        USER_ID:441
+        ROLE_ID:2
+
+    }
+
+    --- example ---
+
+    --- END example ---
+
+//--- END /coupon/delete.json ---//

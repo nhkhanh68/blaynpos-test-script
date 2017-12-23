@@ -1,0 +1,46 @@
+{
+	"info": {
+		"name": "Payment order detail",
+		"_postman_id": "ce2aef5e-d2d5-e277-ec7d-d571c377c21b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "payment/order/detail/read.json",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/payment/order/detail/read.json?payment_id=150549169300011680001&access_token={{access_token}}",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"payment",
+						"order",
+						"detail",
+						"read.json"
+					],
+					"query": [
+						{
+							"key": "payment_id",
+							"value": "150549169300011680001",
+							"equals": true
+						},
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

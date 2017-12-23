@@ -1,0 +1,107 @@
+{
+	"info": {
+		"name": "Charge update",
+		"_postman_id": "d028021d-65e0-15b4-4b9c-9d3ae3aa98f4",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/charge/update.json",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "25933013-bab0-4d95-8055-47e1d46e4753",
+						"type": "text/javascript",
+						"exec": [
+							"var readChargeData;",
+							"pm.test(\"Read charge after update\", function () {",
+							"    // pm.response.json() is response from server after postman send req",
+							"    var jsonData = pm.response.json();",
+							"    if(pm.response.to.have.status(200)){",
+							"            ",
+							"            var url = pm.globals.get(\"server_address\") + \"/dev/v1/charge/read.json?access_token=\" + pm.globals.get(\"access_token\") + \"&charge_id=\" + pm.environment.get(\"charge_id\");",
+							"            // send read API to server",
+							"            pm.sendRequest({",
+							"                url: url,",
+							"                method: 'GET'",
+							"            }, function (err, response) {",
+							"                console.log(response.json());",
+							"                readChargeData = response.json();",
+							"                pm.test(\"Check Content of charge\", function () {",
+							"                    pm.expect(parseInt(readChargeData.content)).to.eql(parseInt(pm.environment.get(\"content\")));",
+							"                });",
+							"                pm.test(\"Check state of charge\", function () {",
+							"                    pm.expect(parseInt(readChargeData.state)).to.eql(parseInt(pm.environment.get(\"state\")));",
+							"                });",
+							"            });",
+							"    }",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "charge_id",
+							"value": "{{charge_id}}",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "state",
+							"value": "{{state}}",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "content",
+							"value": "{{content}}",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "USER_ID",
+							"value": "{{USER_ID}}",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "ROLE_ID",
+							"value": "{{ROLE_ID}}",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/charge/update.json",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"charge",
+						"update.json"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

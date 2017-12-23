@@ -1,0 +1,113 @@
+//--- /category/read.json ---//
+    http_req: {
+        "url": "/category/read.json",
+        "method": "GET"
+    }
+
+    params: {
+        "access_token": ""
+        "state": "1"
+        "parent_id": "5174"
+        "nondepth": ""
+    }
+
+    curl: {
+        curl -X GET \
+          'http://192.168.132.216/dev/v1/category/read.json?access_token=7178591375a0bd7c5d1f009.96684273&state=1&parent_id=5174&nondepth=1' \
+          -H 'cache-control: no-cache' \
+          -H 'postman-token: 476a5ffa-3657-504d-2c54-0b4dae720fed'
+    }
+
+    --- Example 1 ---
+        // pos_shop3.p_shop_category.category_id (chính là parent_id) 
+        // parent_id: 5174.5214 nhưng chỉ có 5174 có response # null
+        params: {
+            "access_token": ""
+            "state": "1"
+            "parent_id": "5174"
+            "nondepth": ""
+        }
+        response: [
+            {
+                "id": 5189,
+                "state": 1,
+                "owner_id": 268,
+                "name": "Set MENU",
+                "description": null,
+                "lft": 329437.001,
+                "rgt": 329437.002,
+                "created": 1507194615,
+                "created_user_id": 441,
+                "modified": null,
+                "sort_order": 15,
+                "background_type": 0,
+                "child_number": 0,
+                "item_number": 11
+            },
+            {
+                "id": 5190,
+                "state": 1,
+                "owner_id": 268,
+                "name": "L)Course",
+                "description": null,
+                "lft": 329437.003,
+                "rgt": 329437.004,
+                "created": 1507194615,
+                "created_user_id": 441,
+                "modified": null,
+                "sort_order": 16,
+                "background_type": 0,
+                "child_number": 0,
+                "item_number": 1
+            },
+            {
+                "id": 5191,
+                "state": 1,
+                "owner_id": 268,
+                "name": "Set　MENU",
+                "description": null,
+                "lft": 329437.005,
+                "rgt": 329437.006,
+                "created": 1507194615,
+                "created_user_id": 441,
+                "modified": null,
+                "sort_order": 17,
+                "background_type": 0,
+                "child_number": 0,
+                "item_number": 9
+            },
+            {
+                "id": 5192,
+                "state": 1,
+                "owner_id": 268,
+                "name": "Lunch Course",
+                "description": null,
+                "lft": 329437.007,
+                "rgt": 329437.008,
+                "created": 1507194615,
+                "created_user_id": 441,
+                "modified": null,
+                "sort_order": 18,
+                "background_type": 0,
+                "child_number": 0,
+                "item_number": 1
+            },
+            {
+                "id": 5193,
+                "state": 1,
+                    "owner_id": 268,
+                "name": "Soft　Drink",
+                "description": null,
+                "lft": 329437.009,
+                "rgt": 329437.01,
+                "created": 1507194615,
+                "created_user_id": 441,
+                "modified": null,
+                "sort_order": 19,
+                "background_type": 0,
+                "child_number": 0,
+                "item_number": 9
+            }
+        ]
+    --- END Example 1 ---
+//--- END /category/read.json ---//

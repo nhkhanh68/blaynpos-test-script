@@ -1,0 +1,123 @@
+{
+	"info": {
+		"name": "item update",
+		"_postman_id": "045c39d8-7ee5-cf6e-e5e5-5bd63c1c8107",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/item/update.json",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "94526f14-e3c3-49aa-8768-5b8356fd4c3e",
+						"type": "text/javascript",
+						"exec": [
+							"var readItemData;",
+							"pm.test(\"Read item after updated\", function () {",
+							"    // Get response data",
+							"    var jsonData = pm.response.json();",
+							"    if(pm.response.to.have.status(200)){ //check if response is ok",
+							"        // Sending http request read",
+							"        var url = pm.globals.get(\"server_address\") + \"/dev/v1/item/read.json?access_token=\" + pm.globals.get(\"access_token\") + \"&item_id=\" + pm.environment.get(\"item_id\");",
+							"        pm.sendRequest({",
+							"            url: url,",
+							"            method: 'GET'",
+							"        }, function (err, response) {",
+							"            // Get response from http request read",
+							"            readItemData = response.json();",
+							"            // Check response data and input data",
+							"            pm.test(\"Check Content of Item after updated\", function () {",
+							"                pm.expect(parseInt(readItemData.cost_price)).to.eql(parseInt(pm.environment.get(\"cost_price\")));",
+							"            });",
+							"            pm.test(\"Check Name of Item after updated\", function () {",
+							"                pm.expect(readItemData.name).to.eql(pm.environment.get(\"name\"));",
+							"            });",
+							"            pm.test(\"Check type of Item after updated\", function () {",
+							"                pm.expect(parseInt(readItemData.price)).to.eql(parseInt(pm.environment.get(\"price\")));",
+							"            });",
+							"        });",
+							"    }",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"type": "text"
+						},
+						{
+							"key": "USER_ID",
+							"value": "{{USER_ID}}",
+							"type": "text"
+						},
+						{
+							"key": "ROLE_ID",
+							"value": "{{ROLE_ID}}",
+							"type": "text"
+						},
+						{
+							"key": "item_id",
+							"value": "{{item_id}}",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "{{name}}",
+							"type": "text"
+						},
+						{
+							"key": "change_f",
+							"value": "{{change_f}}",
+							"type": "text"
+						},
+						{
+							"key": "abbreviation",
+							"value": "{{abbreviation}}",
+							"type": "text"
+						},
+						{
+							"key": "cost_price",
+							"value": "{{cost_price}}",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "{{price}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/item/update.json",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"item",
+						"update.json"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,91 @@
+##### Get access_token ######
+    //--- /terminal/login.json ---//
+        http_req: {
+            "url": "/terminal/login.json",
+            "method": "POST"
+        }
+
+        body: {
+            "type": "1"
+            "login_nm": "senac"
+            "login_pw": "senac"
+            "model_number": "e31210f6767c7ada"
+        }
+
+        response: {
+                "terminal_id": 1168,
+                "user_id": 441,
+                "role_id": 2
+        }
+
+        curl: {
+            curl -X POST \
+            http://192.168.132.216/dev/v1/terminal/login.json \
+            -H 'action: te' \
+            -H 'cache-control: no-cache' \
+            -H 'content-type: application/x-www-form-urlencoded' \
+            -H 'method: log' \
+            -H 'postman-token: 7c0cddc9-dd8b-7b15-fc14-4756499d4078' \
+            -d 'type=1&login_nm=senac&login_pw=senac&model_number=e31210f6767c7ada'
+        }
+    //--- END /terminal/login.json ---//
+
+    //--- /provider/authorize.json ---//
+        Nếu url: /:action/:method.json => 
+        - method = read => scope = r_:action
+        - method = update || create || delete => scope = w_:action
+        Nếu url: action1/action2/method.json => scope = _action1
+        Nếu sử dụng access_token cho nhiều scope khác nhau thì trong 
+        params: {
+            "scope":"r_action w_action r_action1"
+        } 
+
+        http_req: {
+            "url": "/provider/authorize.json",
+            "method": "POST"
+        }
+
+        params: {
+            "client_id": "XAyS25Vwrm.api.order",
+            "response_type": "code",
+            "scope": "",
+            "redirect_uri": "http://***",
+            "state": "1"
+        }
+
+        curl: {
+            curl -X GET \
+            'http://192.168.132.216/dev/v1/provider/authorize.json?client_id=XAyS25Vwrm.api.order&response_type=code&scope=w_table%20r_table%20r_category%20w_payment%20w_item%20w_shop%20r_item&redirect_uri=http%3A%2F%2F***&state=1' \
+            -H 'cache-control: no-cache' \
+            -H 'content-type: application/x-www-form-urlencoded' \
+            -H 'postman-token: 6868e6b3-f84a-b534-f707-75f49f837641' \
+            -d 'client_id=XAyS%2025%20Vwrm.api.order&response_type=authorization%20code&scope=r_owner&redirect_uri=http%3A%20%2F%2F%20***'
+        }
+
+        --- example ---
+            http_req: {
+                "url": "/provider/authorize.json",
+                "method": "POST"
+            }
+
+            params: {
+                "client_id": "XAyS25Vwrm.api.order",
+                "response_type": "code",
+                "scope": "w_table r_table r_category",
+                "redirect_uri": "http://***",
+                "state": "1"
+            }
+
+            response :{
+                "access_token": "15276645695a0e7eb51b8ec2.62681567",
+                "refresh_token": "9878048405a0e7eb51bb486.69722943",
+                "expires_in": 86400,
+                "scope": [
+                    "w_table",
+                    "r_table",
+                    "r_category"
+                ]
+            }
+        ---END example --- 
+    //--- END /provider/authorize.json ---//
+###### END Get access_token ######

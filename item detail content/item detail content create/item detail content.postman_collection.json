@@ -1,0 +1,110 @@
+{
+	"info": {
+		"name": "item detail content",
+		"_postman_id": "a22b2903-6334-5ebc-7776-f6c11ffae450",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "item/detail/content/create.json",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8bb648d0-e618-4b65-9e97-1ce53df525de",
+						"type": "text/javascript",
+						"exec": [
+							"var readData;",
+							"pm.test(\"Read item detail content after created\", function () {",
+							"    // Get response data",
+							"    var jsonData = pm.response.json();",
+							"    if(pm.response.to.have.status(200)){ //check if response is ok",
+							"        if(jsonData.item_detail_content_id !== undefined){",
+							"            // Sending http request read",
+							"            var url = pm.globals.get(\"server_address\") + \"/dev/v1/item/detail/content/read.json?access_token=\" + pm.globals.get(\"access_token\") + \"&item_detail_content_id=\" + jsonData.item_detail_content_id;",
+							"            pm.sendRequest({",
+							"                url: url,",
+							"                method: 'GET'",
+							"            }, function (err, response) {",
+							"                readData = response.json();",
+							"                // Get response from http request read",
+							"                pm.test(\"Check Name of category\", function () {",
+							"                    pm.expect(readData.name).to.eql(pm.environment.get(\"name\"));",
+							"                });",
+							"                 pm.test(\"Check user_id of category\", function () {",
+							"                    pm.expect(parseInt(readData.abbreviation)).to.eql(parseInt(pm.environment.get(\"abbreviation\")));",
+							"                });",
+							"            });",
+							"        }",
+							"    }",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "item_detail_id",
+							"value": "{{item_detail_id}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "USER_ID",
+							"value": "{{USER_ID}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "ROLE_ID",
+							"value": "{{ROLE_ID}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "item_id",
+							"value": "{{item_id}}",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "{{name}}",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/item/detail/content/create.json",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"item",
+						"detail",
+						"content",
+						"create.json"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

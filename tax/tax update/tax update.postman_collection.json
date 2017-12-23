@@ -1,0 +1,130 @@
+{
+	"info": {
+		"name": "tax update",
+		"_postman_id": "3b8049ee-42c3-c8dd-fcc2-3138eb6e494f",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/tax/update.json",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "186a3792-9088-4e74-9493-36263c2b2240",
+						"type": "text/javascript",
+						"exec": [
+							"var readData;",
+							"pm.test(\"Read tax after updated\", function () {",
+							"    // Get response data",
+							"    var jsonData = pm.response.json();",
+							"    if(pm.response.to.have.status(200)){ //check if response is ok",
+							"        // Sending http request read",
+							"        var url = pm.globals.get(\"server_address\") + \"/dev/v1/tax/read.json?access_token=\" + pm.globals.get(\"access_token\") + \"&tax_id=\" + pm.environment.get(\"tax_id\");",
+							"        pm.sendRequest({",
+							"            url: url,",
+							"            method: 'GET'",
+							"        }, function (err, response) {",
+							"            readData = response.json();",
+							"            // Get response from http request read",
+							"            pm.test(\"Check state of tax\", function () {",
+							"                pm.expect(parseInt(readData.state)).to.eql(parseInt(pm.environment.get(\"state\")));",
+							"            });",
+							"            pm.test(\"Check tax_inclusive_f of tax\", function () {",
+							"                pm.expect(readData.tax_inclusive_f).to.eql(true);",
+							"            });",
+							"            pm.test(\"Check round_type of tax\", function () {",
+							"                pm.expect(parseInt(readData.round_type)).to.eql(parseInt(pm.environment.get(\"round_type\")));",
+							"            });",
+							"             pm.test(\"Check payment_type of tax\", function () {",
+							"                pm.expect(parseInt(readData.payment_type)).to.eql(parseInt(pm.environment.get(\"payment_type\")));",
+							"            });",
+							"        });",
+							"    }",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "USER_ID",
+							"value": "{{USER_ID}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "ROLE_ID",
+							"value": "{{ROLE_ID}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "terminal_id",
+							"value": "{{terminal_id}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "tax_id",
+							"value": "{{tax_id}}",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "state",
+							"value": "{{state}}",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "tax_inclusive_f",
+							"value": "{{tax_inclusive_f}}",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "round_type",
+							"value": "{{round_type}}",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "payment_type",
+							"value": "{{payment_type}}",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/tax/update.json",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"tax",
+						"update.json"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

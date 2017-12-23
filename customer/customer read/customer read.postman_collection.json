@@ -1,0 +1,54 @@
+{
+	"info": {
+		"name": "customer read",
+		"_postman_id": "8980ca3b-69d4-02c7-7ab6-beb036a3267d",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "customer/read.json",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/tax/read.json?tax_id={{tax_id}}&access_token={{access_token}}&USER_ID={{USER_ID}}&ROLE_ID={{ROLE_ID}}",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"tax",
+						"read.json"
+					],
+					"query": [
+						{
+							"key": "tax_id",
+							"value": "{{tax_id}}",
+							"equals": true
+						},
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"equals": true
+						},
+						{
+							"key": "USER_ID",
+							"value": "{{USER_ID}}",
+							"equals": true
+						},
+						{
+							"key": "ROLE_ID",
+							"value": "{{ROLE_ID}}",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

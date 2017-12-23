@@ -1,0 +1,33 @@
+{
+	"info": {
+		"name": "etc type delete",
+		"_postman_id": "332f603d-2f70-5dc9-8c12-5fdfe0e808f7",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "etc type delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/etc/type/update.json",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"etc",
+						"type",
+						"update.json"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

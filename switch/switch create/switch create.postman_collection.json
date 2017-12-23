@@ -1,0 +1,103 @@
+{
+	"info": {
+		"name": "switch create",
+		"_postman_id": "6c817502-e510-3095-2145-71a00200567b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/switch/create.json",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3839c168-23e8-4791-a217-37bdeb28f9c1",
+						"type": "text/javascript",
+						"exec": [
+							"var readData;",
+							"pm.test(\"Check switch after run create api\", function () {",
+							"    // Get response data",
+							"    var jsonData = pm.response.json();",
+							"    if(jsonData.status === 701){",
+							"        pm.test(\"switch already opened\", function () {",
+							"            ",
+							"        });",
+							"    }else{",
+							"        var url = pm.globals.get(\"server_address\") + \"/dev/v1/switch/read.json?access_token=\" + pm.globals.get(\"access_token\") + \"&switch_id=\" + jsonData.switch_id;",
+							"        pm.sendRequest({",
+							"            url: url,",
+							"            method: 'GET'",
+							"        }, function (err, response) {",
+							"            readData = response.json();",
+							"            // Get response from http request read",
+							"            pm.test(\"Check switch_id and termial id already open\", function () {",
+							"            });",
+							"        });",
+							"    }",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"type": "text"
+						},
+						{
+							"key": "USER_ID",
+							"value": "{{USER_ID}}",
+							"type": "text"
+						},
+						{
+							"key": "ROLE_ID",
+							"value": "{{ROLE_ID}}",
+							"type": "text"
+						},
+						{
+							"key": "terminal_id",
+							"value": "{{terminal_id}}",
+							"type": "text"
+						},
+						{
+							"key": "switch_day",
+							"value": "{{switch_day}}",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "{{price}}",
+							"type": "text"
+						},
+						{
+							"key": "details",
+							"value": "{{details}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/switch/create.json",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"switch",
+						"create.json"
+					]
+				},
+				"description": null
+			},
+			"response": []
+		}
+	]
+}

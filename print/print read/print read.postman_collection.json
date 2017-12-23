@@ -1,0 +1,23 @@
+{
+	"info": {
+		"name": "print read",
+		"_postman_id": "33c5ecbf-a513-028c-b88b-3082eb1b1c2d",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/print/read.json",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

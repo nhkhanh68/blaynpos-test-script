@@ -1,0 +1,19 @@
+//--- /item/detail/read.json ---//
+    http_req: {
+        "url": "/item/detail/read.json",
+        "method": "GET"
+    }
+
+    params: { 
+        "access_token": "",
+        "state": ""
+
+    }
+
+    curl: {
+	    curl -X GET \
+		  'http://192.168.132.216/dev/v1/item/detail/read.json?access_token=11521101415a2646b317be38.86520382&state=1' \
+		  -H 'cache-control: no-cache' \
+		  -H 'postman-token: e1474a83-caa8-c66a-41a0-bcd70e15f0f0'
+    }
+//--- END /item/detail/read.json ---//

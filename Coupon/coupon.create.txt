@@ -1,0 +1,31 @@
+//--- /coupon/create.json ---//
+    http_req: {
+        "url": "/coupon/create.json",
+        "method": "POST"
+    }
+
+    body: {
+        type:1
+        content:
+        USER_ID:
+        ROLE_ID:
+        access_token:
+        name:割引券
+    }
+
+    --- test case 1 ---
+        body: {
+            type:1
+            content:3000
+            USER_ID:441
+            ROLE_ID:2
+            access_token:11957833415a3097b7666fc6.42431400
+            name:割引券
+        }
+
+        output:{
+            "coupon_id": "138"
+        }
+    --- END test case 1 ---
+
+//--- END /item/create.json ---//

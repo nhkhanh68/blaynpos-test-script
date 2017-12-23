@@ -1,0 +1,22 @@
+//--- /item/detail/update.json ---//
+    http_req: {
+        "url": "/item/detail/update.json",
+        "method": "POST"
+    }
+    body: {
+        'scope': 'w_item',
+        'role': 'public',
+        'action': 'item',
+        'method': 'create',
+        'format': 'json'
+    }
+
+    params: { 
+        "access_token": "",
+        "USER_ID": "",
+        "ROLE_ID": "",
+        "name": "",
+        "item_detail_id": ""
+
+    }
+//--- END /item/detail/update.json ---//

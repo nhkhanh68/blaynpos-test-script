@@ -1,0 +1,29 @@
+//--- /item/detail/create.json ---//
+    http_req: {
+        "url": "/item/detail/create.json",
+        "method": "POST"
+    }
+    body: {
+        'scope': 'w_item',
+        'role': 'public',
+        'action': 'item',
+        'method': 'create',
+        'format': 'json'
+    }
+
+    params: { 
+        "access_token": "",
+        "USER_ID": "",
+        "ROLE_ID": "",
+        "name": "",
+        "created": "",
+        "uid": "",
+    }
+
+    curl: {
+        curl -X POST \
+          'http://192.168.132.216/dev/v1/item/detail/create.json?scope=w_item&role=public&action=item&method=create&format=json&access_token=3238915805a24e9f4ce7d18.85252076&USER_ID=441&ROLE_ID=2&name=Khanh&uid=1' \
+          -H 'cache-control: no-cache' \
+          -H 'postman-token: 16f7c005-9e8c-2969-835d-3870b1f9f523'
+    }
+//--- END /item/detail/create.json ---//

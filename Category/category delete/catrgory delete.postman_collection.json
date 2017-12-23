@@ -1,0 +1,92 @@
+{
+	"info": {
+		"name": "catrgory delete",
+		"_postman_id": "c2ec4f8f-4602-d1d3-abe9-9fc181a133db",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "category delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d820417e-0d32-4735-89b0-25b02b832e18",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"if(pm.response.to.have.status(200)){",
+							"    //read list category have been deleted",
+							"    var state =3;",
+							"    var url = pm.globals.get(\"server_address\") + \"/dev/v1/category/read.json?access_token=\" + pm.globals.get(\"access_token\") + \"&state=\" + state;",
+							"    pm.sendRequest({",
+							"        url: url,",
+							"        method: 'GET'",
+							"    }, function (err, response) {",
+							"        console.log(response.json());",
+							"        var readCategoryData = response.json();",
+							"        // check if in list Category have been deleted has a Category which recently deleted in this test case",
+							"        function equals(element) {",
+							"            return element.id == pm.environment.get(\"category_id\");",
+							"        }",
+							"        var category = readCategoryData.find(equals);",
+							"        pm.test(\"Check state category after delete\", function () {",
+							"            pm.expect(parseInt(category.id)).to.eql(parseInt(pm.environment.get(\"category_id\")));",
+							"        });",
+							"    });",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "USER_ID",
+							"value": "{{USER_ID}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "ROLE_ID",
+							"value": "{{ROLE_ID}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "category_id",
+							"value": "{{category_id}}",
+							"type": "text",
+							"description": ""
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/category/delete.json",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"category",
+						"delete.json"
+					]
+				},
+				"description": null
+			},
+			"response": []
+		}
+	]
+}

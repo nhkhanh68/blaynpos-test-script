@@ -1,0 +1,164 @@
+{
+	"info": {
+		"name": "Table activity create",
+		"_postman_id": "3c6f52a3-4983-fee2-fe20-8df62d6a52a7",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/table/activity/create.json",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5d98391f-945b-441f-8106-f4d9408b9bb0",
+						"type": "text/javascript",
+						"exec": [
+							"var url = pm.globals.get(\"server_address\") + \"/dev/v1/table/activity/read.json?access_token=\" + pm.globals.get(\"access_token\") + \"&table_id=\" + pm.environment.get(\"table_id\");",
+							"//check if there is table activity still open",
+							"function checkOpenTableActivity(){",
+							"    pm.sendRequest(url, function (err, response) {",
+							"        console.log(response.json());",
+							"        var res = response.json();",
+							"        //if res.table_activity_id !== undefined, its mean available table activity still open",
+							"        if(res.table_activity_id !== undefined){",
+							"            var data = {",
+							"                table_activity_id: res.table_activity_id,",
+							"                table_id: pm.environment.get(\"table_id\"),",
+							"                access_token: pm.globals.get(\"access_token\")",
+							"            };",
+							"            // call api /table/activity/change.json to close table activity",
+							"            var table_activity_change_url = pm.globals.get(\"server_address\") + \"/dev/v1/table/activity/change.json?table_activity_id=\" + data.table_activity_id + \"&table_id=\" + data.table_id + \"&access_token=\" + data.access_token;",
+							"            pm.sendRequest({",
+							"                url: table_activity_change_url,",
+							"                method: 'POST',",
+							"                data: data",
+							"            });",
+							"            checkOpenTableActivity();",
+							"        }",
+							"    });",
+							"}",
+							"",
+							"checkOpenTableActivity();",
+							"",
+							"",
+							"",
+							"",
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "77b1370f-c5f8-4941-8e14-53739bcdfb11",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Read table activity after create\", function () {",
+							"    // pm.response.json() is response from server after postman send req",
+							"    var jsonData = pm.response.json();",
+							"    if(pm.response.to.have.status(200)){",
+							"            // create url for read API to check table activity",
+							"            if(jsonData.table_activity_id !== undefined){",
+							"                var url = pm.globals.get(\"server_address\") + \"/dev/v1/table/activity/read.json?access_token=\" + pm.globals.get(\"access_token\") + \"&table_activity_id=\" + jsonData.table_activity_id;",
+							"            // send read API to server",
+							"            pm.sendRequest({",
+							"                url: url,",
+							"                method: 'GET'",
+							"            }, function (err, response) {",
+							"                var readData = response.json();",
+							"                pm.test(\"Check Table activity state\", function () {",
+							"                    pm.expect(parseInt(readData.table_activity_state)).to.eql(parseInt(1));",
+							"                });",
+							"                pm.test(\"Check table_activity_customer_number\", function () {",
+							"                    pm.expect(parseInt(readData.table_activity_customer_number)).to.eql(parseInt(pm.environment.get(\"table_activity_customer_number\")));",
+							"                });",
+							"                pm.test(\"Check table_activity_timer_start\", function () {",
+							"                    pm.expect(parseInt(readData.table_activity_timer_start)).to.eql(parseInt(pm.environment.get(\"table_activity_timer_start\")));",
+							"                });",
+							"                pm.test(\"Check table_activity_timer_duration\", function () {",
+							"                    pm.expect(parseInt(readData.table_activity_timer_duration)).to.eql(parseInt(pm.environment.get(\"table_activity_timer_duration\")));",
+							"                });",
+							"                pm.test(\"Check table_activity_details\", function () {",
+							"                    pm.expect(readData.table_activity_details).to.eql(pm.environment.get(\"table_activity_details\"));",
+							"                });",
+							"            });",
+							"            }",
+							"            ",
+							"    }",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "table_activity_customer_number",
+							"value": "{{table_activity_customer_number}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "table_activity_details",
+							"value": "{{table_activity_details}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "table_activity_timer_start",
+							"value": "{{table_activity_timer_start}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "table_activity_timer_duration",
+							"value": "{{table_activity_timer_duration}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "table_id",
+							"value": "{{table_id}}",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "ignoreOpened",
+							"value": "true",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/table/activity/create.json",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"table",
+						"activity",
+						"create.json"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

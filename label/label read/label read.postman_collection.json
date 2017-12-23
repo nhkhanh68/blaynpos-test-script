@@ -1,0 +1,60 @@
+{
+	"info": {
+		"name": "label read",
+		"_postman_id": "1b2ef777-3588-f97a-ed8c-d6ccd1560409",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/label/read.json",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/cash/flow/read.json?access_token={{access_token}}&USER_ID={{USER_ID}}&ROLE_ID={{ROLE_ID}}&terminal_id={{terminal_id}}&cash_flow_id={{cash_flow_id}}",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"cash",
+						"flow",
+						"read.json"
+					],
+					"query": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"equals": true
+						},
+						{
+							"key": "USER_ID",
+							"value": "{{USER_ID}}",
+							"equals": true
+						},
+						{
+							"key": "ROLE_ID",
+							"value": "{{ROLE_ID}}",
+							"equals": true
+						},
+						{
+							"key": "terminal_id",
+							"value": "{{terminal_id}}",
+							"equals": true
+						},
+						{
+							"key": "cash_flow_id",
+							"value": "{{cash_flow_id}}",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

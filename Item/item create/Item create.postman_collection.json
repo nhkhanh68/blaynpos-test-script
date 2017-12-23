@@ -1,0 +1,137 @@
+{
+	"info": {
+		"name": "Item create",
+		"_postman_id": "c3eff1fe-23e8-78c6-35f1-0c3418da76b0",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/item/create.json",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "089000a9-2bd1-40f9-8fe7-13ad4725cd8e",
+						"type": "text/javascript",
+						"exec": [
+							"pm.globals.get(\"access_token\");"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "c1a03ce7-265f-415e-a35c-c7c316ae697a",
+						"type": "text/javascript",
+						"exec": [
+							"// var response = JSON.parse(responseBody);",
+							"// console.log(response);",
+							"var readItemData;",
+							"pm.test(\"Read item after created\", function () {",
+							"    // Get response data",
+							"    var jsonData = pm.response.json();",
+							"    if(pm.response.to.have.status(200)){ //check if response is ok",
+							"        if(jsonData.item_id !== undefined){",
+							"            // Sending http request read",
+							"            var url = pm.globals.get(\"server_address\") + \"/dev/v1/item/read.json?access_token=\" + pm.globals.get(\"access_token\") + \"&item_id=\" + jsonData.item_id;",
+							"            pm.sendRequest({",
+							"                url: url,",
+							"                method: 'GET'",
+							"            }, function (err, response) {",
+							"                // Get response from http request read",
+							"                readItemData = response.json();",
+							"                pm.test(\"Check Content of Item\", function () {",
+							"                    pm.expect(parseInt(readItemData.cost_price)).to.eql(parseInt(pm.environment.get(\"cost_price\")));",
+							"                });",
+							"                pm.test(\"Check Name of Item\", function () {",
+							"                    pm.expect(readItemData.name).to.eql(pm.environment.get(\"name\"));",
+							"                });",
+							"                pm.test(\"Check type of Item\", function () {",
+							"                    pm.expect(parseInt(readItemData.price)).to.eql(parseInt(pm.environment.get(\"price\")));",
+							"                });",
+							"                pm.test(\"Check type of Item\", function () {",
+							"                    pm.expect(parseInt(readItemData.category_id)).to.eql(parseInt(pm.environment.get(\"category_id\")));",
+							"                });",
+							"                 pm.test(\"Check type of Item\", function () {",
+							"                    pm.expect(parseInt(readItemData.abbreviation)).to.eql(parseInt(pm.environment.get(\"abbreviation\")));",
+							"                });",
+							"            });",
+							"        }",
+							"    }",
+							"    // pm.expect(jsonData.value).to.eql(100);",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"type": "text"
+						},
+						{
+							"key": "USER_ID",
+							"value": "{{USER_ID}}",
+							"type": "text"
+						},
+						{
+							"key": "ROLE_ID",
+							"value": "{{ROLE_ID}}",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "{{name}}",
+							"type": "text"
+						},
+						{
+							"key": "abbreviation",
+							"value": "{{abbreviation}}",
+							"type": "text"
+						},
+						{
+							"key": "cost_price",
+							"value": "{{cost_price}}",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "{{price}}",
+							"type": "text"
+						},
+						{
+							"key": "category_id",
+							"value": "{{category_id}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/item/create.json",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"item",
+						"create.json"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

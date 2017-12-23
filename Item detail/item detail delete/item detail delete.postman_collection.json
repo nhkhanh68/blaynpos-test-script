@@ -1,0 +1,92 @@
+{
+	"info": {
+		"name": "item detail delete",
+		"_postman_id": "e082131e-5212-31ea-bf97-de4659c4e00e",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/item/detail/delete.json",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a6c160b5-3a46-48b8-becd-35980911faab",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"if(pm.response.to.have.status(200)){",
+							"    //read list Item detail have been deleted",
+							"    var state =3;",
+							"    var url = pm.globals.get(\"server_address\") + \"/dev/v1/item/detail/read.json?access_token=\" + pm.globals.get(\"access_token\") + \"&state=\" + state;",
+							"    pm.sendRequest({",
+							"        url: url,",
+							"        method: 'GET'",
+							"    }, function (err, response) {",
+							"        var readData = response.json();",
+							"        // check if in list Item detail have been deleted has a Item detail which recently deleted in this test case",
+							"        function equals(element) {",
+							"            return element.id == pm.environment.get(\"item_detail_id\");",
+							"        }",
+							"        var item = readData.find(equals);",
+							"        pm.test(\"Check state Item detail after delete: state = 3\", function () {",
+							"            pm.expect(parseInt(item.id)).to.eql(parseInt(pm.environment.get(\"item_detail_id\")));",
+							"        });",
+							"    });",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "USER_ID",
+							"value": "{{USER_ID}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "ROLE_ID",
+							"value": "{{ROLE_ID}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "item_detail_id",
+							"value": "{{item_detail_id}}",
+							"type": "text",
+							"description": ""
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/item/detail/delete.json",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"item",
+						"detail",
+						"delete.json"
+					]
+				},
+				"description": null
+			},
+			"response": []
+		}
+	]
+}

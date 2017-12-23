@@ -1,0 +1,44 @@
+{
+	"info": {
+		"name": "Attachment",
+		"_postman_id": "d028021d-65e0-15b4-4b9c-9d3ae3aa98f4",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/attachment/read.json",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/attachment/read.json?attachment_id={{attachment_id}}&access_token={{access_token}}",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"attachment",
+						"read.json"
+					],
+					"query": [
+						{
+							"key": "attachment_id",
+							"value": "{{attachment_id}}",
+							"equals": true
+						},
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,96 @@
+{
+	"info": {
+		"name": "timer create",
+		"_postman_id": "1add7477-77f1-cef5-debe-41b58c6a5985",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/timer/create.json",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "USER_ID",
+							"value": "{{USER_ID}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "ROLE_ID",
+							"value": "{{ROLE_ID}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "terminal_id",
+							"value": "{{terminal_id}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "table_activity_id",
+							"value": "{{table_activity_id}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "type",
+							"value": "{{type}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "state",
+							"value": "{{state}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "setup_time",
+							"value": "{{setup_time}}",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "since_time",
+							"value": "{{since_time}}",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "take_over_time",
+							"value": "{{take_over_time}}",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/timer/create.json",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"timer",
+						"create.json"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

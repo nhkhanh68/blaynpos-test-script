@@ -1,0 +1,23 @@
+{
+	"info": {
+		"name": "etc type update",
+		"_postman_id": "332f603d-2f70-5dc9-8c12-5fdfe0e808f7",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "etc/type/update.json",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,109 @@
+{
+	"info": {
+		"name": "Coupon update",
+		"_postman_id": "481aa111-fffc-f463-68ac-9470485e188d",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/coupon/update.json",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9f5b8062-f475-4ae5-b9b2-b9eb234e6eb2",
+						"type": "text/javascript",
+						"exec": [
+							"var readCouponData;",
+							"pm.test(\"Read coupon after update\", function () {",
+							"    // pm.response.json() is response from server after postman send req",
+							"    var jsonData = pm.response.json();",
+							"    if(pm.response.to.have.status(200)){",
+							"            // create url for read API to check coupon has coupon_id from environment variable has been updated",
+							"            var url = pm.globals.get(\"server_address\") + \"/dev/v1/coupon/read.json?access_token=\" + pm.globals.get(\"access_token\") + \"&coupon_id=\" + pm.environment.get(\"coupon_id\");",
+							"            // send read API to server",
+							"            pm.sendRequest({",
+							"                url: url,",
+							"                method: 'GET'",
+							"            }, function (err, response) {",
+							"                console.log(response.json());",
+							"                readCouponData = response.json();",
+							"                pm.test(\"Check Content of Coupon\", function () {",
+							"                    pm.expect(parseInt(readCouponData.content)).to.eql(parseInt(pm.environment.get(\"content\")));",
+							"                });",
+							"                pm.test(\"Check Name of Coupon\", function () {",
+							"                    pm.expect(readCouponData.name).to.eql(pm.environment.get(\"name\"));",
+							"                });",
+							"                pm.test(\"Check type of Coupon\", function () {",
+							"                    pm.expect(parseInt(readCouponData.type)).to.eql(parseInt(pm.environment.get(\"type\")));",
+							"                });",
+							"            });",
+							"    }",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "type",
+							"value": "{{type}}",
+							"type": "text"
+						},
+						{
+							"key": "content",
+							"value": "{{content}}",
+							"type": "text"
+						},
+						{
+							"key": "USER_ID",
+							"value": "{{USER_ID}}",
+							"type": "text"
+						},
+						{
+							"key": "ROLE_ID",
+							"value": "{{ROLE_ID}}",
+							"type": "text"
+						},
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "{{name}}",
+							"type": "text"
+						},
+						{
+							"key": "coupon_id",
+							"value": "{{coupon_id}}",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/coupon/update.json",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"coupon",
+						"update.json"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

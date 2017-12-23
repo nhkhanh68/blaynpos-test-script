@@ -1,0 +1,23 @@
+{
+	"info": {
+		"name": "contract read",
+		"_postman_id": "2292b025-6a6d-8d6d-a493-d7a69608ae49",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/contract/read.json",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

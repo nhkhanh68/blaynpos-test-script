@@ -1,0 +1,58 @@
+//--- /table/activity/update.json ---//
+    http_req: {
+        "url": "/table/activity / update.json",
+        "method": "POST"
+    }
+
+    body: {
+        'scope': 'w_table',
+        'role': 'public',
+        'action': 'table_activity',
+        'method': 'create',
+        'format': 'json'
+    }
+
+    params: {
+        "uid": ""
+        "access_token": ""
+        "table_activity_id": "",
+        "table_activity_state": "",
+        "table_activity_customer_number": "",
+        "table_activity_details": "",
+        "table_activity_timer_start": "",
+        "table_activity_timer_duration": "",
+        "modified": ""
+    }
+    curl:{
+        curl -X POST \
+          'http://192.168.132.216/dev/v1/table/activity/update.json?access_token=5579877745a14d40fb641f8.07299783&table_activity_id=10616&table_activity_state=1&table_activity_customer_number=7&table_activity_details=%7B%22customer_id%22%3A%22%22%2C%22customer_name%22%3A%22%22%2C%22man%22%3A1%2C%22woman%22%3A6%2C%22total%22%3A7%7D&table_activity_timer_start=1&table_activity_timer_duration=1&modified=1510653823&uid=' \
+          -H 'cache-control: no-cache' \
+          -H 'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' \
+          -H 'postman-token: 42e51f3b-abc3-f8de-9fe3-0d2cc0048907' \
+          -F scope=w_table \
+          -F role=public \
+          -F action=table_activity \
+          -F method=create \
+          -F format=json
+    }
+    --- example ---
+        shop_id (senac) : 386
+        pos_shop3.p_table.table_id: 773, 1130, 1131, 1132
+        pos_shop3.p_table_activity.table_id: 773.table_activity_id: 10617, 10616, 10615
+        params: {
+            "uid": ""
+            "access_token": ""
+            "table_activity_id": "10617",
+            "table_activity_state": "1",
+            "table_activity_customer_number": "7",
+            "table_activity_details": "{"customer_id":"","customer_name":"","man":1,"woman":6,"total":7}",
+            "table_activity_timer_start": "",
+            "table_activity_timer_duration": "",
+            "modified": ""
+        }
+        response: {
+            "message": "success_ok"
+        }
+    --- END example ---
+
+//--- END /table/activity/update.json ---//

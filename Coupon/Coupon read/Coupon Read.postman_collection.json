@@ -1,0 +1,52 @@
+{
+	"info": {
+		"name": "Coupon Read",
+		"_postman_id": "ce2aef5e-d2d5-e277-ec7d-d571c377c21b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/coupon/read.json",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "192.168.132.216/dev/v1/coupon/read.json?access_token={{access_token}}&state=3",
+					"host": [
+						"192",
+						"168",
+						"132",
+						"216"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"coupon",
+						"read.json"
+					],
+					"query": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"equals": true
+						},
+						{
+							"key": "state",
+							"value": "3",
+							"equals": true
+						},
+						{
+							"key": "coupon_id",
+							"value": "176",
+							"equals": true,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

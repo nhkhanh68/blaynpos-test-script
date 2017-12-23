@@ -1,0 +1,109 @@
+{
+	"info": {
+		"name": "switch update",
+		"_postman_id": "6c817502-e510-3095-2145-71a00200567b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/switch/update.json",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a5f35ca6-7e6b-4a8a-926e-a5436cda906b",
+						"type": "text/javascript",
+						"exec": [
+							"var readData;",
+							"pm.test(\"Read switch after updated\", function () {",
+							"    // Get response data",
+							"    var jsonData = pm.response.json();",
+							"    if(pm.response.to.have.status(200)){ //check if response is ok",
+							"        // Sending http request read",
+							"        var url = pm.globals.get(\"server_address\") + \"/dev/v1/switch/read.json?access_token=\" + pm.globals.get(\"access_token\") + \"&switch_id=\" + pm.environment.get(\"switch_id\");",
+							"        pm.sendRequest({",
+							"            url: url,",
+							"            method: 'GET'",
+							"        }, function (err, response) {",
+							"            readData = response.json();",
+							"            // Get response from http request read",
+							"            pm.test(\"Check details of staff after updated\", function () {",
+							"                pm.expect(parseInt(readData.details)).to.eql(parseInt(pm.environment.get(\"details\")));",
+							"            });",
+							"        });",
+							"    }",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "USER_ID",
+							"value": "{{USER_ID}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "ROLE_ID",
+							"value": "{{ROLE_ID}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "terminal_id",
+							"value": "{{terminal_id}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "switch_id",
+							"value": "{{switch_id}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "retrying_f",
+							"value": "{{retrying_f}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "details",
+							"value": "{{details}}",
+							"type": "text",
+							"description": ""
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/switch/update.json",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"switch",
+						"update.json"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

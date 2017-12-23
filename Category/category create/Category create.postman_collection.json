@@ -1,0 +1,101 @@
+{
+	"info": {
+		"name": "Category create",
+		"_postman_id": "0b1a5b61-a0b8-c23b-9b63-619500ad4374",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "category create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eae9dc20-7ccb-4429-a002-419103af56dc",
+						"type": "text/javascript",
+						"exec": [
+							"var readCategoryData;",
+							"pm.test(\"Read category after created\", function () {",
+							"    // Get response data",
+							"    var jsonData = pm.response.json();",
+							"    if(pm.response.to.have.status(200)){ //check if response is ok",
+							"        if(jsonData.category_id !== undefined){",
+							"            // Sending http request read",
+							"            var url = pm.globals.get(\"server_address\") + \"/dev/v1/category/read.json?access_token=\" + pm.globals.get(\"access_token\") + \"&category_id=\" + jsonData.category_id;",
+							"            pm.sendRequest({",
+							"                url: url,",
+							"                method: 'GET'",
+							"            }, function (err, response) {",
+							"                readCategoryData = response.json();",
+							"                // Get response from http request read",
+							"                pm.test(\"Check Name of category\", function () {",
+							"                    pm.expect(readCategoryData.name).to.eql(pm.environment.get(\"name\"));",
+							"                });",
+							"                 pm.test(\"Check user_id of category\", function () {",
+							"                    pm.expect(parseInt(readItemData.abbreviation)).to.eql(parseInt(pm.environment.get(\"abbreviation\")));",
+							"                });",
+							"            });",
+							"        }",
+							"    }",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "{{name}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "USER_ID",
+							"value": "{{USER_ID}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "ROLE_ID",
+							"value": "{{ROLE_ID}}",
+							"type": "text",
+							"description": ""
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/category/create.json",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"category",
+						"create.json"
+					]
+				},
+				"description": null
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,192 @@
+{
+	"info": {
+		"name": "Login - Get access_token",
+		"_postman_id": "11291dbe-8635-4bff-91e2-4a98f8497e2d",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/terminal/login.json",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a412388b-cc20-4fa0-87b2-2c96034ab743",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Set terminal_id\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    console.log(jsonData);",
+							"    pm.globals.set(\"terminal_id\", jsonData.terminal_id);",
+							"});",
+							"pm.test(\"Set USER_ID\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    console.log(jsonData);",
+							"    pm.globals.set(\"USER_ID\", jsonData.user_id);",
+							"});",
+							"pm.test(\"Set ROLE_ID\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    console.log(jsonData);",
+							"    pm.globals.set(\"ROLE_ID\", jsonData.role_id);",
+							"});",
+							"",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "scope",
+						"value": ""
+					},
+					{
+						"key": "action",
+						"value": "te"
+					},
+					{
+						"key": "method",
+						"value": "log"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "type",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "login_nm",
+							"value": "senac",
+							"type": "text"
+						},
+						{
+							"key": "login_pw",
+							"value": "senac",
+							"type": "text"
+						},
+						{
+							"key": "model_number",
+							"value": "e31210f6767c7ada",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/terminal/login.json",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"terminal",
+						"login.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/provider/authorize.json",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7907bc75-0edf-4ae4-9a18-81edeea782d1",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Set access_token\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    console.log(jsonData);",
+							"    pm.globals.set(\"access_token\", jsonData.access_token);",
+							"});",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "XAyS 25 Vwrm.api.order",
+							"type": "text"
+						},
+						{
+							"key": "response_type",
+							"value": "authorization code",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "r_owner",
+							"type": "text"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http: // ***",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/provider/authorize.json?client_id=XAyS25Vwrm.api.order&response_type=code&scope=r_category r_clientele r_item r_label r_order r_owner r_payment r_shop r_staff r_table r_terminal r_user w_category w_clientele w_item w_order w_owner w_payment w_shop w_staff w_table w_terminal w_user&redirect_uri=http://***&state=1",
+					"protocol": "{{server_address}}/dev/v1/provider/authorize.json?client_id=XAyS25Vwrm.api.order&response_type=code&scope=r_category r_clientele r_item r_label r_order r_owner r_payment r_shop r_staff r_table r_terminal r_user w_category w_clientele w_item w_order w_owner w_payment w_shop w_staff w_table w_terminal w_user&redirect_uri=http",
+					"host": [
+						"***&state=1"
+					],
+					"query": [
+						{
+							"key": "client_id",
+							"value": "XAyS25Vwrm.api.order",
+							"equals": true
+						},
+						{
+							"key": "response_type",
+							"value": "code",
+							"equals": true
+						},
+						{
+							"key": "scope",
+							"value": "r_category r_clientele r_item r_label r_order r_owner r_payment r_shop r_staff r_table r_terminal r_user w_category w_clientele w_item w_order w_owner w_payment w_shop w_staff w_table w_terminal w_user",
+							"equals": true
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http://***",
+							"equals": true
+						},
+						{
+							"key": "state",
+							"value": "1",
+							"equals": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

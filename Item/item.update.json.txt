@@ -1,0 +1,102 @@
+﻿//--- /item/update.json ---//
+    http_req: {
+        "url": "/item/update.json",
+        "method": "POST"
+    }
+    body: {
+        'scope': 'w_item',
+        'role': 'public',
+        'action': 'item',
+        'method': 'create',
+        'format': 'json'
+    }
+
+    params: {
+        "uid": "",
+        "item_id": "",
+        "name": "",
+        "price": "",
+        "change_f": "",
+        "modified": "",
+        "abbreviation": "",
+        "item_detail_id": "",
+        "cost_price": "",
+        "stock": "",
+        "access_token": "",
+        "USER_ID": "",
+        "ROLE_ID": ""
+
+    }
+
+    --- Test case 1 ---
+    	- item_id: pos_owner3.p_item.created_user_id(441) -> id(item_id).
+    	- Example item_id: 19967
+    	params: {
+            "uid": "",
+            "item_id": "19967",
+            "name": "白菜キムチ",
+            "price": "1834",
+            "change_f": "",
+            "modified": "",
+            "abbreviation": "",
+            "cost_price": "1981",
+            "stock": "1",
+            "access_token": "",
+            "USER_ID": "2",
+            "ROLE_ID": "441"
+
+        }
+        - Expected output: "message": "success_ok"
+        - Change in database: 
+         + pos_owner3.p_item.price (id:19967) = 1834
+         + pos_owner3.p_item.cost_price (id:19967) = 1981
+         + pos_owner3.p_item.name (id:19967) = 白菜キムチ
+         + pos_shop3.p_shop_item.stock (item_id:19967) = 1
+    --- END Test case 1 ---
+
+    --- Test case 2 ---
+        - item_id: pos_owner3.p_item.created_user_id(441) -> id(item_id).
+        - Example item_id: 19967
+        params: {
+            "uid": "",
+            "item_id": "19967",
+            "name": "",
+            "price": "price",
+            "change_f": "",
+            "modified": "",
+            "abbreviation": "",
+            "cost_price": "",
+            "stock": "",
+            "access_token": "",
+            "USER_ID": "2",
+            "ROLE_ID": "441"
+        }
+        - Expected output: {
+            "status": 500,
+            "error": "For input string: \"price\""
+        }
+    --- END Test case 2 ---
+
+    --- Test case 3 ---
+        - item_id: pos_owner3.p_item.created_user_id(owner_id:260) -> id(item_id).
+        - Example item_id: 1
+        params: {
+            "uid": "",
+            "item_id": "1",
+            "name": "",
+            "price": "price",
+            "change_f": "",
+            "modified": "",
+            "abbreviation": "",
+            "cost_price": "",
+            "stock": "",
+            "access_token": "",
+            "USER_ID": "2",
+            "ROLE_ID": "441"
+        }
+        - Expected output: {
+            "status": 404,
+            "error": "item not found"
+        }
+    --- END Test case 3 ---
+//--- END /item/update.json ---//

@@ -1,0 +1,95 @@
+{
+	"info": {
+		"name": "item detail content delete",
+		"_postman_id": "e7131cdf-226b-614e-d539-26b7074c42ee",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "item detail content delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2759c19d-ba4d-4b69-9841-65049e078594",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"if(pm.response.to.have.status(200)){",
+							"    //read list Item detail have been deleted",
+							"    var state = 3;",
+							"    // var url = pm.globals.get(\"server_address\") + \"/dev/v1/item/detail/content/read.json?access_token=18270002535a3be6c74a9941.40891840&state=3&item_detail_id=111\";",
+							"    var url = pm.globals.get(\"server_address\") + \"/dev/v1/item/detail/content/read.json?access_token=\" + pm.globals.get(\"access_token\") + \"&state=\" + state+ \"&item_detail_id=\"+ pm.environment.get(\"item_detail_id\");",
+							"    console.log(url);",
+							"    pm.sendRequest({",
+							"        url: url,",
+							"        method: 'GET'",
+							"    }, function (err, response) {",
+							"        var readData = response.json();",
+							"        // check if in list Item detail have been deleted has a Item detail which recently deleted in this test case",
+							"        function equals(element) {",
+							"            return element.id == pm.environment.get(\"item_detail_id\");",
+							"        }",
+							"        var item = readData.find(equals);",
+							"        pm.test(\"Check state Item detail after delete: state = 3\", function () {",
+							"            pm.expect(parseInt(item.id)).to.eql(parseInt(pm.environment.get(\"item_detail_id\")));",
+							"        });",
+							"    });",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "access_token",
+							"value": "{{access_token}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "USER_ID",
+							"value": "{{USER_ID}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "ROLE_ID",
+							"value": "{{ROLE_ID}}",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "item_detail_content_id",
+							"value": "{{item_detail_content_id}}",
+							"type": "text",
+							"description": ""
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server_address}}/dev/v1/item/detail/content/delete.json",
+					"host": [
+						"{{server_address}}"
+					],
+					"path": [
+						"dev",
+						"v1",
+						"item",
+						"detail",
+						"content",
+						"delete.json"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
